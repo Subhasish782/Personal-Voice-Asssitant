@@ -10,7 +10,7 @@ import geminiResponse from './gemini.js';
 
 const app=express();
 app.use(cors({
-    origin:"https://github.com/Subhasish782/Personal-Voice-Asssitant",
+    origin:"https://virtualassistant-hgvy.onrender.com",
     credentials:true,
 }))
 const PORT=process.env.PORT || 3000;
