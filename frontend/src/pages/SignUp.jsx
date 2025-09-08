@@ -27,10 +27,14 @@ const SignUp = () => {
             setLoading(false);
             navigate("/customize");
         } catch (error) {
-            console.log(error);
-            setUserData(null);
-            setErr(error.response.data.message);
-            setLoading(false);
+            // console.log(error);
+            // setUserData(null);
+            // setErr(error.response.data.message);
+            // setLoading(false);
+             console.log(error);
+             setUserData(null);
+             setErr(error?.response?.data?.message || "An unexpected error occurred. Please try again.");
+             setLoading(false);
         }
     };
 
