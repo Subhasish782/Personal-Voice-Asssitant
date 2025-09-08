@@ -10,7 +10,7 @@ import geminiResponse from './gemini.js';
 
 const app=express();
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://github.com/Subhasish782/Personal-Voice-Asssitant",
     credentials:true,
 }))
 const PORT=process.env.PORT || 3000;
