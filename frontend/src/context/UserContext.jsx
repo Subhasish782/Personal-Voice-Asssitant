@@ -4,7 +4,7 @@ import axios from 'axios';
 export const userDataContext = createContext();
 
 function UserContext({ children }) {
-    const serverUrl = "https://virtualassistant-backend-hhfc.onrender.com";
+    const serverUrl = import.meta.env.VITE_SERVER_URL || "http://localhost:3000";
     const [userData, setUserData] = useState(null);
     const [backendImage,setBackendImage]=useState(null);
     const [frontendImage,setFrontendImage]=useState(null);
@@ -16,7 +16,11 @@ function UserContext({ children }) {
             setUserData(result.data);
             console.log(result.data);
         } catch (error) {
-            console.log(error);
+            console.error("Error fetching current user:", error.response?.data || error.message);
+            // Don't set userData to null on network errors, only on auth errors
+            if (error.response?.status === 401 || error.response?.status === 403) {
+                setUserData(null);
+            }
         }
     };
 
@@ -29,7 +33,8 @@ function UserContext({ children }) {
         )
         return result.data
       } catch (error) {
-        console.log(error)
+        console.error("Error getting Gemini response:", error.response?.data || error.message);
+        return { response: "Sorry, I'm having trouble connecting right now. Please try again." };
       }
     }
 
