@@ -31,10 +31,14 @@ const SignUp = () => {
             // setUserData(null);
             // setErr(error.response.data.message);
             // setLoading(false);
-             console.log(error);
-             setUserData(null);
-             setErr(error?.response?.data?.message || "An unexpected error occurred. Please try again.");
-             setLoading(false);
+             if (error.response && error.response.data && error.response.data.message) {
+                 setErr(error.response.data.message);
+             } else if (error.message) {
+                 setErr(error.message); // fallback for network errors
+             } else {
+                  setErr("An unknown error occurred.");
+             }
+}
         }
     };
 
